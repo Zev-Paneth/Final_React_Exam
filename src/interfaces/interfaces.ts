@@ -1,5 +1,5 @@
-import { Model, Types} from 'mongoose';
-import { Request } from 'express'
+import { Model } from 'mongoose';
+import { Request } from 'express';
 
 export enum OrganizationEnum {
     IDFNorth = 'IDF - North',
@@ -10,7 +10,6 @@ export enum OrganizationEnum {
     HAMAS = 'Hamas',
     IRGC = 'IRGC',
     HOUTHIS = 'Houthis'
-
 }
 
 export enum ResourceEnum {
@@ -28,29 +27,30 @@ export enum ResourceEnum {
     Q1 = 'Quds-1'
 }
 
-export interface IResources {
+export interface IResource {
     name: ResourceEnum;
     amount: number;
 }
 
 export interface IOrganization {
     name: OrganizationEnum;
-    resources: IResources;
+    resources: IResource[];
     budget?: number;
 }
 
 export interface IUser {
-    _id?: Types.ObjectId;
-    username: string | null | undefined;
-    password?: string;
+    username: string;
+    password: string;
     organization: IOrganization;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
-export interface UserModel extends Model<IUser, {}> {}
+export interface UserModel extends Model<IUser> {}
 
 export interface AuthenticatedRequest extends Request {
     user?: {
         username: string;
-        organization: IOrganization;
+        organizations: IOrganization[];
     };
 }

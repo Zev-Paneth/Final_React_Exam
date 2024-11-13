@@ -1,17 +1,17 @@
 import asyncHandler from "express-async-handler";
 import {Request, Response} from 'express'
 import bcrypt from 'bcrypt';
-import User from '../models/userModel.js'
-import jwt from 'jsonwebtoken';
+import {User} from '../models/userModel.js'
 import dotenv from 'dotenv';
 import {AuthenticatedRequest, IUser} from "../interfaces/interfaces";
-import accessToken from '../config/tokens.js'
+import accessToken from '../services/tokens'
+import bringOrg from '../services/organizationsService.js'
 
 dotenv.config();
 
 export const registerUser = asyncHandler(async (req: Request, res: Response) => {
 
-    const {username, password, organization}: IUser = req.body;
+    const {username, password, organization} = req.body;
 
     if (!username || !password || !organization) {
         res.status(400);
@@ -26,10 +26,12 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const usersOrg = bringOrg(organization)
     const user : IUser = await User.create({
         username,
         password: hashedPassword,
-        organization
+        organization: usersOrg
     })
 
     if (user) {
