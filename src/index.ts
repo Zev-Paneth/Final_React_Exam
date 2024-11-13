@@ -2,6 +2,8 @@ import dotenv from 'dotenv'
 import connectToDB from "./config/connectToDB.js";
 import express from 'express'
 import cors from 'cors'
+import userRoutes from "./routes/userRoutes.js"
+
 
 
 dotenv.config()
@@ -20,7 +22,7 @@ app.use(cors({
 }))
 
 
-
+app.use('/api/users', userRoutes)
 
 
 
