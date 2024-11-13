@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import {Document, Model, Types} from 'mongoose';
 
 export enum OrganizationEnum {
     IDFNorth = 'IDF - North',
@@ -12,13 +12,17 @@ export enum OrganizationEnum {
 
 }
 
-export interface IUser extends Document {
-    id?: mongoose.Schema.Types.ObjectId;
+
+export interface IUser {
+    _id?: Types.ObjectId;
     username: string | null | undefined;
     password?: string;
-    organization: OrganizationEnum
+    organization: OrganizationEnum;
+    __v?: number;
 }
 
+
+export interface UserModel extends Model<IUser, {}> {}
 
 export interface AuthenticatedRequest extends Request {
     user?: {

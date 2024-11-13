@@ -1,13 +1,12 @@
-import mongoose from "mongoose";
-import {OrganizationEnum} from "../interfaces/interfaces";
+import mongoose, {model, Schema} from "mongoose";
+import {IUser, OrganizationEnum, UserModel} from "../interfaces/interfaces";
 
-const userSchema = new mongoose.Schema({
-    username: {type: String, required: true, unique: true},
-    password: {type: String, required: true},
-    organization: {type: OrganizationEnum, required: true},
+const userSchema = new Schema<IUser, UserModel>({
+    username: { type: String },
+    password: { type: String },
+    organization: { type: String, enum: OrganizationEnum }
 }, {
     timestamps: true
-})
+});
 
-export default mongoose.model('User', userSchema);
-
+export default model<IUser, UserModel>('User', userSchema);
