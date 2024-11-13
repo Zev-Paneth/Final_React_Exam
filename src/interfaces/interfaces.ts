@@ -1,4 +1,5 @@
 import {Document, Model, Types} from 'mongoose';
+import { Request } from 'express'
 
 export enum OrganizationEnum {
     IDFNorth = 'IDF - North',
