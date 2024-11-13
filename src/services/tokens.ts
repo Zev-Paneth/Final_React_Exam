@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import {IUser} from "../interfaces/interfaces";
 
-export default (user: IUser) => {
-    jwt.sign(
+export default async (user: IUser) => {
+    return jwt.sign(
         {
             user: {
                 username: user.username,

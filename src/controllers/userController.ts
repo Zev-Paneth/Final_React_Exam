@@ -27,7 +27,7 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const usersOrg = bringOrg(organization)
+    const usersOrg = await bringOrg(organization)
     const user : IUser = await User.create({
         username,
         password: hashedPassword,
@@ -35,9 +35,10 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
     })
 
     if (user) {
-        accessToken(user)
+        const AccessToken = await accessToken(user)
+        console.log("AccessToken", AccessToken)
         res.status(201).json({
-            accessToken
+            AccessToken
         });
     } else {
         res.status(400);
@@ -71,11 +72,10 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
     }
 
     if (await validatedPassword()) {
-        accessToken(user);
-        res.status(200).json({
-            title: 'Login Successfully',
-            accessToken,
-        })
+        const AccessToken = await accessToken(user)
+        res.status(201).json({
+            AccessToken
+        });
     } else {
         res.status(401);
         throw new Error("InCorrect password");
