@@ -39,11 +39,9 @@ export interface IOrganization {
 }
 
 export interface IUser {
-    username: string;
-    password: string;
-    organization: IOrganization;
-    createdAt: Date;
-    updatedAt: Date;
+    username: string | null;
+    password: string | null;
+    organization: IOrganization | string | null;
 }
 
 export interface UserModel extends Model<IUser> {}

@@ -36,7 +36,6 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
 
     if (user) {
         const AccessToken = await accessToken(user)
-        console.log("AccessToken", AccessToken)
         res.status(201).json({
             AccessToken
         });
