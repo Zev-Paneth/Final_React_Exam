@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import userRoutes from "./routes/userRoutes.js"
 import {errorHandler} from "./middleware/errorHandler";
+import attackRoutes from "./routes/attackRoutes";
 
 
 
@@ -23,6 +24,7 @@ app.use(cors({
 }))
 
 app.use('/api/users', userRoutes)
+app.use('/api/attacks', attackRoutes)
 
 app.use(errorHandler)
 
