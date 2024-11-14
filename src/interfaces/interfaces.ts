@@ -41,7 +41,7 @@ export interface IOrganization {
 export interface IUser {
     username: string | null;
     password: string | null;
-    organization: IOrganization | string | null;
+    organization?: IOrganization | string | null;
 }
 
 export interface UserModel extends Model<IUser> {}

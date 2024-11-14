@@ -85,7 +85,7 @@ export const currentUser = async (req: AuthenticatedRequest, res: Response) => {
     try {
         res.json(req.user)
     } catch (err) {
-        res.status(400)
-        throw new Error('the vote is in problem')
+        res.status(400);
+        throw new Error('the vote is in problem');
     }
 };

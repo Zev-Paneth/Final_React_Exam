@@ -15,14 +15,15 @@ const app = express()
 app.use(express.json())
 
 const port = process.env.PORT || 3000;
-const origin = "http://localhost:5173"
+const origin = ["http://localhost:5173", "http://localhost:5175"]
 
 app.use(cors({
-    origin: origin,
+    origin: "*",
     credentials: true
 }))
 
 app.use('/api/users', userRoutes)
+
 app.use(errorHandler)
 
 
