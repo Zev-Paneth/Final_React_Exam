@@ -39,7 +39,7 @@ export interface IOrganization {
 }
 
 export interface IUser {
-    _id: Schema.Types.ObjectId;
+    _id?: Schema.Types.ObjectId;
     username: string | null;
     password: string | null;
     organization?: IOrganization | string | null;
